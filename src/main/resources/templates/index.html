@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Manager</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    form{
+    display: inline;
+    }
+    .content {
+    margin: auto;
+    width: 60%;
+    border: 3px solid transparent;
+    padding: 10px;
+}
+    .table{
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div align="center">
+                        <h1>Product Manager</h1>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <form action="logout">
+                                    <button class="btn btn-danger">Log Out</button>
+                                </form>
+                            </div>
+                            <div class="col-md-8">
+                                <form action="new">
+                                    <button class="btn btn-primary">Add New Product</button>
+                                </form>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <br>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table" border="1" cellpadding="10">
+                                    <thead>
+                                    <tr>
+                                        <th>Brand</th>
+                                        <th>Model</th>
+                                        <th>Liters</th>
+                                        <th>Horsepower</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="product : ${listProducts}">
+                                        <td th:text="${product.brand}">Brand</td>
+                                        <td th:text="${product.model}">Model</td>
+                                        <td th:text="${product.liters}">Liters</td>
+                                        <td th:text="${product.hp}">Horsepower</td>
+                                        <td th:text="${product.price}">Price</td>
+                                        <td>
+                                            <form th:action="@{'/edit/'+ ${product.id}}">
+                                                <button class="btn btn-success">Edit</button>
+                                            </form>
+                                            <form th:action="@{'/delete/'+ ${product.id}}">
+                                                <button class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
